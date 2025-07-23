@@ -50,14 +50,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         <td>${pkg.apartment}</td>
                         <td>${pkg.resident || '-'}</td>
                         <td>${pkg.description || '-'}</td>
-                        <td>${pkg.descricao || '-'}</td>
+                        <td class="descricao-cell">${pkg.descricao || '-'}</td>
                         <td>${pkg.courier || '-'}</td>
                         <td>${pkg.receivedBy || '-'}</td>
                         <td><span class="status-badge status-pending"><i class='fas fa-clock'></i> Pendente</span></td>
                         <td>
                             <button class="btn-action btn-success" onclick="markAsDelivered('${pkg.id}')" title="Marcar como entregue"><i class="fas fa-check"></i> Entregue</button>
                             <button class="btn-action btn-warning" onclick="editPackage('${pkg.id}')" title="Editar encomenda"><i class="fas fa-edit"></i> Editar</button>
-                            <button class="btn-action btn-danger" onclick="deletePackage('${pkg.id}')" title="Excluir encomenda"><i class="fas fa-trash"></i></button>
                         </td>
                     `;
                     pendingTable.appendChild(row);
@@ -178,6 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (editForm) {
                 editForm.onsubmit = function(e) {
                     e.preventDefault();
+                    if (editModal) editModal.style.display = 'none';
                     const id = document.getElementById('edit-id').value;
                     const date = document.getElementById('edit-date').value;
                     const resident = document.getElementById('edit-resident').value;
@@ -204,7 +204,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     savePackages();
                     renderTables();
                     showToast('Encomenda editada com sucesso!');
-                    editModal.style.display = 'none';
                 };
             }
 

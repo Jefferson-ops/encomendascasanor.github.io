@@ -33,71 +33,87 @@
 
         /* Modo escuro aprimorado */
         body.dark-mode {
-            background-color: #181a20;
+            background: linear-gradient(135deg, #181a20 0%, #23232b 100%);
             color: #e2e2e2;
         }
-
-        body.dark-mode .card {
+        body.dark-mode .card, body.dark-mode .modal-content {
             background: #23232b;
             color: #e2e2e2;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.45);
+            border-radius: 14px;
+            border: 1.5px solid #232c3b;
         }
-
         body.dark-mode header {
-            background: linear-gradient(135deg, #23232b 60%, #181a20 100%);
-            color: #e2e2e2;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+            background: linear-gradient(120deg, #23232b 60%, #181a20 100%);
+            color: #fff;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.45);
+            border-radius: 14px;
+            border: 1.5px solid #232c3b;
         }
-
         body.dark-mode th {
-            background-color: #2c2c38;
+            background: #232c3b;
             color: #f5f5f5;
-            border-bottom: 1px solid #444;
+            border-bottom: 1.5px solid #2c3e50;
         }
-
         body.dark-mode td {
-            background-color: #23232b;
+            background: #23232b;
             color: #e2e2e2;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid #232c3b;
         }
-
         body.dark-mode tr:nth-child(even) {
-            background-color: #20202a;
+            background: #20202a;
         }
-
         body.dark-mode tr:hover {
-            background-color: #282838;
+            background: #282838;
         }
-
         body.dark-mode .status-badge {
-            background-color: #222;
+            background: #232c3b;
             color: #e2e2e2;
-            border: 1px solid #444;
+            border: 1px solid #3498db;
         }
-
         body.dark-mode .status-pending {
-            background-color: #ffe082;
+            background: #ffe082;
             color: #4b3f1d;
         }
-
         body.dark-mode .status-delivered {
-            background-color: #81ffb0;
+            background: #81ffb0;
             color: #1d4b2c;
         }
-
         body.dark-mode input,
         body.dark-mode select,
         body.dark-mode textarea {
             background: #23232b;
             color: #e2e2e2;
-            border: 1px solid #444;
+            border: 1.5px solid #3498db;
+            border-radius: 8px;
         }
-
         body.dark-mode input:focus,
         body.dark-mode select:focus,
         body.dark-mode textarea:focus {
-            border-color: #3498db;
+            border-color: #81ffb0;
             background: #181a20;
+        }
+        body.dark-mode .btn-action, body.dark-mode .btn-primary, body.dark-mode .btn-success, body.dark-mode .btn-warning, body.dark-mode .btn-danger {
+            box-shadow: 0 2px 8px rgba(44,62,80,0.18);
+            border: none;
+        }
+        body.dark-mode .btn-action:hover, body.dark-mode .btn-primary:hover, body.dark-mode .btn-success:hover, body.dark-mode .btn-warning:hover, body.dark-mode .btn-danger:hover {
+            filter: brightness(1.15) saturate(1.2);
+            box-shadow: 0 4px 16px rgba(44,62,80,0.28);
+        }
+        body.dark-mode .header-info {
+            background: rgba(44,62,80,0.18);
+            border: 1.5px solid #232c3b;
+            color: #e2e2e2;
+        }
+        body.dark-mode .modal-content {
+            background: #23232b;
+            color: #e2e2e2;
+            border-radius: 14px;
+            border: 1.5px solid #232c3b;
+        }
+        body.dark-mode .subtitle {
+            color: #b0c4d8;
         }
 
         body.dark-mode .tab {
@@ -341,7 +357,6 @@
         }
 
         th, td {
-            white-space: normal;        
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid #eee;
@@ -542,6 +557,12 @@
             table th:nth-child(7), table td:nth-child(7) {
                 display: none;
             }
+            td:nth-child(5) {
+                white-space: pre-line;
+                word-break: break-word;
+                max-height: 4.5em;
+                overflow-y: auto;
+            }
             .modal-content {
                 max-width: 98vw;
                 padding: 6px 1px;
@@ -739,5 +760,180 @@ footer {
     /* Status e ações sempre visíveis */
     table th:last-child, table td:last-child {
         display: table-cell;
+    }
+}
+/***** LAYOUT FLEX MODERNO *****/
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    padding: 0 2vw;
+    box-sizing: border-box;
+}
+.card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 2rem 1.5rem;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+    border-radius: 1rem;
+    background: white;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    gap: 1.5rem;
+}
+.header-flex {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 2rem;
+    margin-bottom: 0.5rem;
+}
+@media (max-width: 900px) {
+    .container {
+        padding: 0 1vw;
+    }
+    .header-flex {
+        gap: 1rem;
+    }
+    .card {
+        padding: 1.2rem 0.5rem;
+        gap: 1rem;
+    }
+}
+@media (max-width: 600px) {
+    .container {
+        padding: 0 0.5vw;
+    }
+    .header-flex {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.2rem;
+        margin-top: -0.5rem;
+    }
+    .logo {
+        height: 2.2em;
+        max-width: 80vw;
+    }
+    .header-titles h1 {
+        font-size: 0.95rem;
+        text-align: center;
+        margin-bottom: 2px;
+    }
+    .subtitle {
+        font-size: 0.85rem;
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+    .header-info {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 2px;
+        margin-bottom: 4px;
+        border-radius: 8px;
+        padding: 3px 1px;
+        font-size: 0.9rem;
+        gap: 2px;
+    }
+    #current-date, #pending-count {
+        font-size: 0.85em;
+    }
+    .export-container, .search-container {
+        margin-top: 4px;
+        margin-bottom: 4px;
+        width: 100%;
+        justify-content: center;
+    }
+    #export-csv, #search-input {
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 6px 4px;
+    }
+    .btn-action {
+        padding: 3px 6px;
+        font-size: 0.9rem;
+        border-radius: 12px;
+        min-width: 0;
+    }
+    table {
+        width: 100%;
+        min-width: unset;
+        font-size: 0.85rem;
+        table-layout: fixed;
+        word-break: break-word;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    th, td {
+        padding: 2px 1px;
+        white-space: normal;
+    }
+    /* Esconder colunas não essenciais (exibir só 1-4, 8-9) */
+    table th:nth-child(5), table td:nth-child(5),
+    table th:nth-child(6), table td:nth-child(6),
+    table th:nth-child(7), table td:nth-child(7) {
+        display: none;
+    }
+    /* Status e ações sempre visíveis */
+    table th:last-child, table td:last-child {
+        display: table-cell;
+    }
+    .modal-content {
+        max-width: 98vw;
+        padding: 4px 1px;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+        width: 100%;
+        font-size: 0.9rem;
+        padding: 6px 6px;
+        margin-bottom: 4px;
+    }
+}
+@media (max-width: 480px) {
+    .header-flex {
+        gap: 0.2rem;
+    }
+    .logo {
+        height: 1.5em;
+    }
+    .header-titles h1 {
+        font-size: 0.85rem;
+    }
+    .subtitle {
+        font-size: 0.75rem;
+    }
+    .header-info {
+        font-size: 0.8rem;
+        padding: 2px 0.5px;
+    }
+    .btn-action {
+        font-size: 0.8rem;
+        padding: 2px 4px;
+    }
+    table {
+        font-size: 0.8rem;
+    }
+}
+
+.descricao-cell {
+    white-space: pre-line;
+    word-break: break-all;
+    max-height: 4.5em;
+    max-width: 180px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+@media (max-width: 600px) {
+    .descricao-cell {
+        max-width: 90px;
+        font-size: 0.85em;
     }
 }

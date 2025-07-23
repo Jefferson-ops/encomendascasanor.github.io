@@ -10,19 +10,27 @@
 <body>
     <div class="container">
         <header>
-            <h1>
-                <i class="fas fa-box-open"></i>
-                Controle de Encomendas
-                <button id="toggle-theme" aria-label="Alternar tema" title="Alternar tema" style="margin-left:15px; background:none; border:none; cursor:pointer; font-size:1.5rem;">
-                    <i id="theme-icon" class="fas fa-moon"></i>
-                </button>
-            </h1>
-            <p>Condomínio Casa Nor</p>
+            <div class="header-flex">
+                <img src="logo.png" alt="Logo" class="logo">
+                <div class="header-titles">
+                    <h1>
+                        Controle de Encomendas
+                        <button id="toggle-theme" aria-label="Alternar tema" title="Alternar tema" style="margin-left:15px; background:none; border:none; cursor:pointer; font-size:1.5rem;">
+                            <i id="theme-icon" class="fas fa-moon"></i>
+                        </button>
+                    </h1>
+                    <p class="subtitle">Condomínio Casa Nor</p>
+                </div>
+            </div>
             <div class="header-info">
                 <span id="current-date"></span>
                 <span id="pending-count">0 encomendas pendentes</span>
             </div>
         </header>
+
+        <div class="export-container">
+            <button id="export-csv" class="btn btn-success"><i class="fas fa-file-csv"></i> Exportar CSV</button>
+        </div>
 
         <div class="card">
             <div class="tabs">
@@ -85,16 +93,16 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="description"><i class="fas fa-tag"></i> Descrição:</label>
-                        <input type="text" id="description" placeholder="Ex: Pacote, Documento, Encomenda Pequena" required>
+                        <label for="description"><i class="fas fa-tag"></i> Código N-F:</label>
+                        <input type="text" id="description" placeholder="Ex: 123456, 7891011" required>
                     </div>
                     <div class="form-group">
                         <label for="courier"><i class="fas fa-truck"></i> Transportadora/Entregador:</label>
                         <input type="text" id="courier" placeholder="Ex: Correios, Mercado Livre, Loggi">
                     </div>
                     <div class="form-group">
-                        <label for="notes"><i class="fas fa-sticky-note"></i> Observações:</label>
-                        <textarea id="notes" placeholder="Detalhes adicionais"></textarea>
+                        <label for="descricao"><i class="fas fa-sticky-note"></i> Descrição:</label>
+                        <textarea id="descricao" placeholder="Ex: Pacote, Documento, Encomenda Pequena"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-save"></i> Registrar Encomenda
@@ -109,6 +117,7 @@
                             <th>Data/Hora</th>
                             <th>Unidade</th>
                             <th>Morador</th>
+                            <th>Código N-F</th>
                             <th>Descrição</th>
                             <th>Entregador</th>
                             <th>Funcionário/a que recebeu</th>
@@ -128,6 +137,7 @@
                             <th>Data/Hora Entr.</th>
                             <th>Unidade</th>
                             <th>Morador</th>
+                            <th>Código N-F</th>
                             <th>Descrição</th>
                             <th>Entregador</th>
                             <th>Funcionário/a Entregou</th>
@@ -144,9 +154,10 @@
                             <th>Data/Hora</th>
                             <th>Unidade</th>
                             <th>Morador</th>
+                            <th>Código N-F</th>
                             <th>Descrição</th>
-                            <th>Funcionário Recebeu</th>
-                            <th>Funcionário Entregou</th>
+                            <th>Funcionário/a Recebeu</th>
+                            <th>Funcionário/a Entregou</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -154,6 +165,57 @@
                 </table>
             </div>
         </div>
+    </div>
+    <!-- Modal de edição de encomenda -->
+    <div id="edit-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="edit-modal-title">
+      <div class="modal-content">
+        <span class="close" id="close-edit-modal" tabindex="0" aria-label="Fechar edição">&times;</span>
+        <h2 id="edit-modal-title">Editar Encomenda</h2>
+        <form id="edit-form">
+          <input type="hidden" id="edit-id" name="edit-id">
+          <div class="form-group">
+            <label for="edit-date">Data/Hora:</label>
+            <input type="text" id="edit-date" name="edit-date" required>
+          </div>
+          <div class="form-group">
+            <label for="edit-resident">Nome do Morador:</label>
+            <input type="text" id="edit-resident" name="edit-resident" required>
+          </div>
+          <div class="form-group">
+            <label for="edit-apartment">Unidade:</label>
+            <input type="text" id="edit-apartment" name="edit-apartment" required>
+          </div>
+          <div class="form-group">
+            <label for="edit-description">Código N-F:</label>
+            <input type="text" id="edit-description" name="edit-description" required>
+          </div>
+          <div class="form-group">
+            <label for="edit-descricao">Descrição:</label>
+            <input type="text" id="edit-descricao" name="edit-descricao">
+          </div>
+          <div class="form-group">
+            <label for="edit-courier">Transportadora/Entregador:</label>
+            <input type="text" id="edit-courier" name="edit-courier">
+          </div>
+          <div class="form-group">
+            <label for="edit-receivedBy">Funcionário/a que recebeu:</label>
+            <input type="text" id="edit-receivedBy" name="edit-receivedBy">
+          </div>
+          <button type="submit" class="btn btn-primary" aria-label="Salvar alterações">Salvar Alterações</button>
+        </form>
+      </div>
+    </div>
+    <!-- Modal de confirmação de exclusão -->
+    <div id="delete-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+      <div class="modal-content">
+        <span class="close" id="close-delete-modal" tabindex="0" aria-label="Fechar confirmação">&times;</span>
+        <h2 id="delete-modal-title">Confirmar Exclusão</h2>
+        <p>Tem certeza que deseja excluir esta encomenda?</p>
+        <div style="display:flex; gap:16px; justify-content:center; margin-top:18px;">
+          <button id="confirm-delete" class="btn btn-danger" aria-label="Excluir encomenda">Excluir</button>
+          <button id="cancel-delete" class="btn btn-secondary" aria-label="Cancelar exclusão">Cancelar</button>
+        </div>
+      </div>
     </div>
     <footer style="text-align:center; padding: 18px 0; color: var(--gray); font-size:1rem;">
         by Jefferson Oliveira <sup>&reg;</sup>

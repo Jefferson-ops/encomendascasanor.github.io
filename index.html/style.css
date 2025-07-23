@@ -683,3 +683,24 @@ footer {
 .btn-secondary:hover {
     background: #95a5a6;
 }
+
+@media (max-width: 600px) {
+    #all-table th:nth-child(6), #all-table td:nth-child(6),
+    #all-table th:nth-child(7), #all-table td:nth-child(7) {
+        display: none;
+    }
+    #all-table th, #all-table td {
+        font-size: 0.92rem;
+        padding: 5px 4px;
+    }
+    #all-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+    #all-table .btn-action {
+        padding: 4px 7px;
+        font-size: 0.92rem;
+        border-radius: 14px;
+    }
+}

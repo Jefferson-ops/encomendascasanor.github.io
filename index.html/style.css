@@ -553,6 +553,14 @@
                 padding: 7px 8px;
                 margin-bottom: 6px;
             }
+            .tab-content {
+                overflow-x: auto;
+                width: 100vw;
+                padding-bottom: 2px;
+            }
+            #all-table {
+                min-width: 600px;
+            }
         }
 
 footer {
@@ -701,5 +709,34 @@ footer {
         padding: 4px 7px;
         font-size: 0.92rem;
         border-radius: 14px;
+    }
+}
+
+@media (max-width: 600px) {
+    .tab-content {
+        overflow-x: unset;
+        width: 100vw;
+        padding-bottom: 2px;
+    }
+    table {
+        width: 100%;
+        min-width: unset;
+        font-size: 0.88rem;
+        table-layout: fixed;
+        word-break: break-word;
+    }
+    th, td {
+        padding: 3px 2px;
+        white-space: normal;
+    }
+    /* Esconder colunas não essenciais (exibir só 1-4, 8-9) */
+    table th:nth-child(5), table td:nth-child(5),
+    table th:nth-child(6), table td:nth-child(6),
+    table th:nth-child(7), table td:nth-child(7) {
+        display: none;
+    }
+    /* Status e ações sempre visíveis */
+    table th:last-child, table td:last-child {
+        display: table-cell;
     }
 }

@@ -493,9 +493,13 @@
             }
             .header-info {
                 flex-direction: column;
-                align-items: flex-start;
-                font-size: 0.95rem;
-                gap: 2px;
+                align-items: stretch;
+                padding: 6px 6px;
+                gap: 4px;
+                font-size: 0.98rem;
+                border-radius: 12px;
+                border-width: 1px;
+                box-shadow: 0 1px 4px rgba(44,62,80,0.08);
             }
             .header-info span {
                 font-size: 1rem;
@@ -504,14 +508,14 @@
                 padding: 10px;
             }
             table {
-                font-size: 0.9rem;
+                font-size: 0.92rem;
                 width: 100%;
                 display: block;
                 overflow-x: auto;
                 white-space: nowrap;
             }
             th, td {
-                padding: 6px 8px;
+                padding: 6px 6px;
             }
             #fab-add {
                 right: 16px;
@@ -529,6 +533,26 @@
             #search-input {
                 width: 100%;
                 font-size: 0.95rem;
+            }
+            .export-container, .search-container {
+                margin-top: 8px;
+                margin-bottom: 8px;
+                width: 100%;
+                justify-content: center;
+            }
+            #export-csv, #search-input {
+                width: 100%;
+                font-size: 0.95rem;
+                padding: 8px 8px;
+            }
+            .btn-action {
+                padding: 6px 10px;
+                font-size: 0.95rem;
+                border-radius: 18px;
+            }
+            .modal-content {
+                max-width: 98vw;
+                padding: 8px 2px;
             }
         }
 

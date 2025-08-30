@@ -501,6 +501,7 @@
             .logo {
                 height: 3.2em;
                 max-width: 80vw;
+                border-radius: 15px;      
             }
             .header-titles h1 {
                 font-size: 1rem;
@@ -937,3 +938,4 @@ footer {
         font-size: 0.85em;
     }
 }
+
